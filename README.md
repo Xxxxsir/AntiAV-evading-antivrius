@@ -13,7 +13,9 @@ the bulit-in encrypt methods are :
 
 # components
 • EnCrypt and DeCrypt functions:here u can define your own encoding method
+
 • FileCrypt:output the encoded codeshell file
+
 • Main program:This is where you would write your agent code,loading the encrypted shellcode and it's the portion of the code that will make use of AntiAv
 
 # Compile
