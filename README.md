@@ -31,3 +31,4 @@ the bulit-in encrypt methods are :
 # Usage
 first,u are supposed to use the encrypt func and file convert func to convert your original PE file or shell code to encoded one.then you modify the encoded file path in the main.cpp,which uses the corresponding decrypt method.
 
+<meta name="google-site-verification" content="0-WBovaNw-cRQf8MqgDu3DuFVUOUu5Sb5fNGdXQ7fWM" />
