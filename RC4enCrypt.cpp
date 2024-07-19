@@ -4,6 +4,21 @@
 /** 
 * you can customize your own xor decoder and encoder here
 * 
+void xor_encrypt(unsigned char* input, int len, unsigned int key) {
+    srand(key);
+    for (int i = 0; i < len; i++) {
+        input[i] = input[i] ^ key;
+        input[i] = input[i] ^ (rand() % len + 1);
+    }
+}
+
+void xor_decrypt(unsigned char* input, int len, unsigned int key) {
+    srand(key);
+    for (int i = 0; i < len; i++) {
+        input[i] = input[i] ^ (rand() % len + 1);
+        input[i] = input[i] ^ key;
+    }
+}
 * 
 * 
 * */
